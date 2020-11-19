@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Drive } from './interface/drive.interface';
 import { DRIVE } from '../data/drive';
 import { from, Observable, of, throwError } from 'rxjs';
-import { find, map, mergeMap } from 'rxjs/operators';
+import { find, map, mergeMap, tap } from 'rxjs/operators';
+import { CreateDriveDto } from './dto/create-drive.dto';
 
 @Injectable()
 export class DriveService{
@@ -31,6 +32,32 @@ export class DriveService{
             of(_) :
             throwError(new NotFoundException(`Drive with id '${id}' not found`)),
         ),
+      );
+  }
+
+  create(drive: CreateDriveDto): Observable<Drive> {
+    return from(this._drives)
+      .pipe(
+        find(_ => _.id.toLowerCase() === drive.id.toLowerCase()),
+        mergeMap(_ =>
+          !!_ ?
+            throwError(
+              new ConflictException(`Drive with id '${drive.id}' already exists`),
+            ) :
+            this._addPerson(drive),
+        ),
+      );
+  }
+
+  private _addPerson(drive: CreateDriveDto): Observable<Drive> {
+    return of(drive)
+      .pipe(
+        map(_ =>
+          Object.assign(_, {
+            birthDate: this._parseDate(drive.date),
+          }) as Drive,
+        ),
+        tap(_ => this._drives = this._drives.concat(_)),
       );
   }
 

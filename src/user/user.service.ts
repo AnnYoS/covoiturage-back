@@ -1,8 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './interface/user.interface';
 import { USER } from '../data/user';
 import { from, Observable, of, throwError } from 'rxjs';
-import { find, map, mergeMap } from 'rxjs/operators';
+import { find, map, mergeMap, tap } from 'rxjs/operators';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService{
@@ -29,6 +30,31 @@ export class UserService{
             of(_) :
             throwError(new NotFoundException(`User with id '${id}' not found`)),
         ),
+      );
+  }
+
+  create(person: CreateUserDto): Observable<User> {
+    return from(this._users)
+      .pipe(
+        find(_ => _.lastname.toLowerCase() === person.lastname.toLowerCase() &&
+          _.firstname.toLowerCase() === person.firstname.toLowerCase()),
+        mergeMap(_ =>
+          !!_ ?
+            throwError(
+              new ConflictException(`People with lastname '${person.lastname}' and firstname '${person.firstname}' already exists`),
+            ) :
+            this._addPerson(person),
+        ),
+      );
+  }
+
+  private _addPerson(person: CreateUserDto): Observable<User> {
+    return of(person)
+      .pipe(
+        map(_ =>
+          Object.assign(_) as User,
+        ),
+        tap(_ => this._users = this._users.concat(_)),
       );
   }
 }
