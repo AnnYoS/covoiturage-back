@@ -5,7 +5,7 @@ Il est possible de faire:
 
 Voila comment j'ai organisé les données:
 
-Users:
+User:
   id: number;
   firstname: string;
   lastname: string;
