@@ -1,7 +1,6 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { Drive } from './interface/drive.interface';
-import { DRIVE } from '../data/drive';
 import { DriveService } from './drive.service';
 import { DriveInterceptor } from './interceptor/drive.interceptor';
 
@@ -15,5 +14,10 @@ export class DriveController{
   @Get()
   findAll():Observable<Drive[] | void>{
     return this._driveService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string): Observable<Drive> {
+    return this._driveService.findOne(id);
   }
 }

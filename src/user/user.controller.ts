@@ -1,7 +1,6 @@
-import { Controller, Get, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Param, UseInterceptors } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { User } from './interface/user.interface';
-import { USER } from '../data/user';
 import { UserInterceptor } from './interceptor/user.interceptor';
 import { UserService } from './user.service';
 
@@ -15,5 +14,10 @@ export class UserController{
   @Get()
   findAll():Observable<User[] | void>{
     return this._userService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: number): Observable<User> {
+    return this._userService.findOne(id);
   }
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Drive } from './interface/drive.interface';
 import { DRIVE } from '../data/drive';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { from, Observable, of, throwError } from 'rxjs';
+import { find, map, mergeMap } from 'rxjs/operators';
 
 @Injectable()
 export class DriveService{
@@ -19,6 +19,18 @@ export class DriveService{
     return of(this._drives)
       .pipe(
         map(_ => (!!_ && !!_.length) ? _ : undefined),
+      );
+  }
+
+  findOne(id: string): Observable<Drive> {
+    return from(this._drives)
+      .pipe(
+        find(_ => _.id === id),
+        mergeMap(_ =>
+          !!_ ?
+            of(_) :
+            throwError(new NotFoundException(`Drive with id '${id}' not found`)),
+        ),
       );
   }
 
