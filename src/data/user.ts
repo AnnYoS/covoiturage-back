@@ -1,0 +1,42 @@
+export const USER = [
+  {
+    id: 1,
+    firstname: 'Patrick',
+    lastname: 'Letoile',
+    age: 27,
+    phone: '0645769598',
+    mail: 'p.letoile@gmail.com',
+  },
+  {
+    id: 2,
+    firstname: 'Bob',
+    lastname: 'Leponge',
+    age: 34,
+    phone: '0645769753',
+    mail: 'b.leponge@gmail.com',
+  },
+  {
+    id: 3,
+    firstname: 'Capi',
+    lastname: 'Krabe',
+    age: 45,
+    phone: '0644532753',
+    mail: 'c.krabe@gmail.com',
+  },
+  {
+    id: 4,
+    firstname: 'Elisa',
+    lastname: 'Asile',
+    age: 18,
+    phone: '0612345678',
+    mail: 'e.asile@gmail.com',
+  },
+  {
+    id: 5,
+    firstname: 'Erik',
+    lastname: 'Kire',
+    age: 68,
+    phone: '0687654321',
+    mail: 'e.kire@gmail.com',
+  },
+];
