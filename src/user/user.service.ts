@@ -20,7 +20,7 @@ export class UserService{
       );
   }
 
-  findOne(id: number): Observable<User> {
+  findOne(id: string): Observable<User> {
     return from(this._users)
       .pipe(
         find(_ => _.id === id),

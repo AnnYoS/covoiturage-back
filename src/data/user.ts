@@ -1,6 +1,6 @@
 export const USER = [
   {
-    id: 1,
+    id: '1',
     firstname: 'Patrick',
     lastname: 'Letoile',
     age: 27,
@@ -8,7 +8,7 @@ export const USER = [
     mail: 'p.letoile@gmail.com',
   },
   {
-    id: 2,
+    id: '2',
     firstname: 'Bob',
     lastname: 'Leponge',
     age: 34,
@@ -16,7 +16,7 @@ export const USER = [
     mail: 'b.leponge@gmail.com',
   },
   {
-    id: 3,
+    id: '3',
     firstname: 'Capi',
     lastname: 'Krabe',
     age: 45,
@@ -24,7 +24,7 @@ export const USER = [
     mail: 'c.krabe@gmail.com',
   },
   {
-    id: 4,
+    id: '4',
     firstname: 'Elisa',
     lastname: 'Asile',
     age: 18,
@@ -32,7 +32,7 @@ export const USER = [
     mail: 'e.asile@gmail.com',
   },
   {
-    id: 5,
+    id: '5',
     firstname: 'Erik',
     lastname: 'Kire',
     age: 68,
