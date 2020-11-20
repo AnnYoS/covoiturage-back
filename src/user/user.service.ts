@@ -63,8 +63,8 @@ export class UserService{
   update(id: string, user: UpdateUserDto): Observable<User> {
     return from(this._users)
       .pipe(
-        find(_ => _.firstname.toLowerCase() === user.firstname.toLowerCase()
-          || user.lastname.toLowerCase() === _.lastname.toLowerCase() || _.mail.toLowerCase() === user.mail.toLowerCase()),
+        find(_ => _.firstname.toLowerCase() !== user.firstname.toLowerCase()
+          || user.lastname.toLowerCase() !== _.lastname.toLowerCase() || _.mail.toLowerCase() === user.mail.toLowerCase()),
         mergeMap(_ =>
           !!_ ?
             throwError(
