@@ -11,7 +11,7 @@ Il est possible de faire:
 ## Voila comment j'ai organisé les données:
 
 ### User:
-- id: number
+- id: string
 - firstname: string
 - lastname: string
 - age: number
@@ -21,8 +21,8 @@ Il est possible de faire:
  
 ### Drive:
 - id: string;
-- driver: number;
-- clients: number[];
+- driver: string;
+- clients: string[];
 - start: Adress;
 - finish: Adress;
 - duration: number;
