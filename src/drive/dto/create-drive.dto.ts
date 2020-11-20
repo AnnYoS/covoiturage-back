@@ -1,15 +1,44 @@
-import { Adress } from '../interface/drive.interface';
 import { DriveAdressDto } from './drive-adress.dto';
+import { IsDate, IsInstance, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateDriveDto{
-  readonly id: string;
+
+  @IsString()
+  @IsNotEmpty()
   readonly driver: string;
-  readonly clients?: string[];
+
+  @IsString()
+  readonly clients: string[];
+
+  @IsInstance(DriveAdressDto)
+  @ValidateNested()
+  @Type(() => DriveAdressDto)
+  @IsNotEmpty()
   readonly start: DriveAdressDto;
+
+  @IsInstance(DriveAdressDto)
+  @ValidateNested()
+  @Type(() => DriveAdressDto)
+  @IsNotEmpty()
   readonly finish: DriveAdressDto;
-  readonly duration?: number;
+
+  @IsNumber()
+  readonly duration: number;
+
+  @IsNumber()
+  @IsNotEmpty()
   readonly price: number;
-  readonly stops?: DriveAdressDto[];
+
+  @IsInstance(DriveAdressDto)
+  @ValidateNested()
+  @Type(() => DriveAdressDto)
+  readonly stops: DriveAdressDto[];
+
+  @IsNumber()
   readonly nbseats: number;
+
+  @IsDate()
+  @IsNotEmpty()
   readonly date: string;
 }

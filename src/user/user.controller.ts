@@ -5,6 +5,7 @@ import { UserInterceptor } from './interceptor/user.interceptor';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { HandlerNameParam, HandlerUserIdParam } from './validator/handler-user-params';
 
 @Controller('user')
 @UseInterceptors(UserInterceptor)
@@ -19,13 +20,13 @@ export class UserController{
   }
 
   @Get(':id')
-  findOneById(@Param('id') id: string): Observable<User> {
-    return this._userService.findOneById(id);
+  findOneById(@Param() param: HandlerUserIdParam): Observable<User> {
+    return this._userService.findOneById(param.id);
   }
 
   @Get('/fname/:name')
-  findMultipleByName(@Param('name') name: string): Observable<User>{
-    return this._userService.findMultipleByName(name);
+  findMultipleByName(@Param() param: HandlerNameParam): Observable<User>{
+    return this._userService.findMultipleByName(param.name);
   }
 
   @Post()
@@ -34,12 +35,12 @@ export class UserController{
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdateUserDto): Observable<User> {
-    return this._userService.update(id, updatePersonDto);
+  update(@Param() param: HandlerUserIdParam, @Body() updatePersonDto: UpdateUserDto): Observable<User> {
+    return this._userService.update(param.id, updatePersonDto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): Observable<void> {
-    return this._userService.delete(id);
+  delete(@Param() param: HandlerUserIdParam): Observable<void> {
+    return this._userService.delete(param.id);
   }
 }

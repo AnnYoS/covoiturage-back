@@ -4,7 +4,7 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import * as Config from 'config';
 import { AppConfig } from './app-config.interface';
 
@@ -13,10 +13,13 @@ async function bootstrap(config: AppConfig) {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    })
+  )
   await app.listen(config.port, config.host);
-  Logger.log(
-    `Application served at http://${config.host}:${config.port}`,
-    'bootstrap',
-  );
+  Logger.log(`Application served at http://${config.host}:${config.port}`, 'bootstrap');
 }
 bootstrap(Config.get<AppConfig>('server'));

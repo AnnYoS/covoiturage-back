@@ -1,10 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Drive } from './interface/drive.interface';
 import { DriveService } from './drive.service';
 import { DriveInterceptor } from './interceptor/drive.interceptor';
 import { CreateDriveDto } from './dto/create-drive.dto';
 import { UpdateDriveDto } from './dto/update-drive.dto';
+import {
+  HandlerCitynameParam,
+  HandlerDriveIdParam,
+} from './validator/handler-drive-params';
 
 @Controller('drive')
 @UseInterceptors(DriveInterceptor)
@@ -19,23 +23,23 @@ export class DriveController{
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Observable<Drive> {
-    return this._driveService.findOne(id);
+  findOne(@Param() param: HandlerDriveIdParam): Observable<Drive> {
+    return this._driveService.findOne(param.id);
   }
 
-  @Get(':cityname')
-  findMultipleByCityName(@Param('cityname')city: string): Observable<Drive> {
-    return this._driveService.findMultipleByCityName(city);
+  @Get('/city/:cityname')
+  findMultipleByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+    return this._driveService.findMultipleByCityName(param.cityname);
   }
 
   @Get('/begin/:cityname')
-  findMultipleBeginByCityName(@Param('cityname')city: string): Observable<Drive> {
-    return this._driveService.findMultipleBeginByCityName(city);
+  findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+    return this._driveService.findMultipleBeginByCityName(param.cityname);
   }
 
   @Get('/end/:cityname')
-  findMultipleEndByCityName(@Param('cityname')city: string): Observable<Drive> {
-    return this._driveService.findMultipleEndByCityName(city);
+  findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+    return this._driveService.findMultipleEndByCityName(param.cityname);
   }
 
   @Post()
@@ -44,12 +48,12 @@ export class DriveController{
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdateDriveDto): Observable<Drive> {
-    return this._driveService.update(id, updatePersonDto);
+  update(@Param() param: HandlerDriveIdParam, @Body() updatePersonDto: UpdateDriveDto): Observable<Drive> {
+    return this._driveService.update(param.id, updatePersonDto);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: string): Observable<void> {
-    return this._driveService.delete(id);
+  delete(@Param() param: HandlerDriveIdParam): Observable<void> {
+    return this._driveService.delete(param.id);
   }
 }
