@@ -1,7 +1,7 @@
 export interface Drive{
   id: string;
-  driver: number;
-  clients: number[];
+  driver: string;  //it's the id of a user
+  clients: string[];  //it's the id of a user
   start: Adress;
   finish: Adress;
   duration: number;
