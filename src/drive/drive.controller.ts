@@ -22,6 +22,16 @@ export class DriveController{
     return this._driveService.findOne(id);
   }
 
+  @Get('/begin/:cityname')
+  findMultipleBeginByCityName(@Param('cityname')city: string): Observable<Drive> {
+    return this._driveService.findMultipleBeginByCityName(city);
+  }
+
+  @Get('/end/:cityname')
+  findMultipleEndByCityName(@Param('cityname')city: string): Observable<Drive> {
+    return this._driveService.findMultipleEndByCityName(city);
+  }
+
   @Post()
   create(@Body() createPersonDto: CreateDriveDto): Observable<Drive> {
     return this._driveService.create(createPersonDto);

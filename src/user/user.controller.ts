@@ -18,8 +18,13 @@ export class UserController{
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Observable<User> {
-    return this._userService.findOne(id);
+  findOneById(@Param('id') id: string): Observable<User> {
+    return this._userService.findOneById(id);
+  }
+
+  @Get('/fname/:name')
+  findMultipleByName(@Param('name') name: string): Observable<User>{
+    return this._userService.findMultipleByName(name);
   }
 
   @Post()

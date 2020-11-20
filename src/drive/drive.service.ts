@@ -35,6 +35,30 @@ export class DriveService{
       );
   }
 
+  findMultipleBeginByCityName(city: string): Observable<Drive> {
+    return from(this._drives)
+      .pipe(
+        find(_ => _.start.city === city),
+        mergeMap(_ =>
+          !!_ ?
+            of(_) :
+            throwError(new NotFoundException(`Drive with beginning in '${city}' not found`)),
+        ),
+      );
+  }
+
+  findMultipleEndByCityName(city: string): Observable<Drive> {
+    return from(this._drives)
+      .pipe(
+        find(_ => _.finish.city === city),
+        mergeMap(_ =>
+          !!_ ?
+            of(_) :
+            throwError(new NotFoundException(`Drive with finishing in '${city}' not found`)),
+        ),
+      );
+  }
+
   create(drive: CreateDriveDto): Observable<Drive> {
     return from(this._drives)
       .pipe(
