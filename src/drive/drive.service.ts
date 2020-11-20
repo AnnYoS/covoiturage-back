@@ -92,6 +92,14 @@ export class DriveService{
       );
   }
 
+  delete(id: string): Observable<void> {
+    return this._findDriveIndexOfList(id)
+      .pipe(
+        tap(_ => this._drives.splice(_, 1)),
+        map(() => undefined),
+      );
+  }
+
   private _addDrive(drive: CreateDriveDto): Observable<Drive> {
     return of(drive)
       .pipe(

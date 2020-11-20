@@ -77,6 +77,14 @@ export class UserService{
       );
   }
 
+  delete(id: string): Observable<void> {
+    return this._findUserIndexOfList(id)
+      .pipe(
+        tap(_ => this._users.splice(_, 1)),
+        map(() => undefined),
+      );
+  }
+
   private _findUserIndexOfList(id: string): Observable<number> {
     return from(this._users)
       .pipe(

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { User } from './interface/user.interface';
 import { UserInterceptor } from './interceptor/user.interceptor';
@@ -36,5 +36,10 @@ export class UserController{
   @Put(':id')
   update(@Param('id') id: string, @Body() updatePersonDto: UpdateUserDto): Observable<User> {
     return this._userService.update(id, updatePersonDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string): Observable<void> {
+    return this._userService.delete(id);
   }
 }

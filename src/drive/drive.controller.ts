@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseInterceptors } from '@nestjs/common';
 import { Observable, of } from 'rxjs';
 import { Drive } from './interface/drive.interface';
 import { DriveService } from './drive.service';
@@ -46,5 +46,10 @@ export class DriveController{
   @Put(':id')
   update(@Param('id') id: string, @Body() updatePersonDto: UpdateDriveDto): Observable<Drive> {
     return this._driveService.update(id, updatePersonDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string): Observable<void> {
+    return this._driveService.delete(id);
   }
 }
