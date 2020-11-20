@@ -9,6 +9,7 @@ import {
   HandlerCitynameParam,
   HandlerDriveIdParam,
 } from './validator/handler-drive-params';
+import { DriveEntity } from './entity/drive.entity';
 
 @Controller('drive')
 @UseInterceptors(DriveInterceptor)
@@ -23,32 +24,32 @@ export class DriveController{
   }
 
   @Get(':id')
-  findOne(@Param() param: HandlerDriveIdParam): Observable<Drive> {
+  findOne(@Param() param: HandlerDriveIdParam): Observable<DriveEntity> {
     return this._driveService.findOne(param.id);
   }
 
   @Get('/city/:cityname')
-  findMultipleByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+  findMultipleByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
     return this._driveService.findMultipleByCityName(param.cityname);
   }
 
   @Get('/begin/:cityname')
-  findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+  findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
     return this._driveService.findMultipleBeginByCityName(param.cityname);
   }
 
   @Get('/end/:cityname')
-  findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<Drive> {
+  findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
     return this._driveService.findMultipleEndByCityName(param.cityname);
   }
 
   @Post()
-  create(@Body() createDriveDto: CreateDriveDto): Observable<Drive> {
+  create(@Body() createDriveDto: CreateDriveDto): Observable<DriveEntity> {
     return this._driveService.create(createDriveDto);
   }
 
   @Put(':id')
-  update(@Param() param: HandlerDriveIdParam, @Body() updatePersonDto: UpdateDriveDto): Observable<Drive> {
+  update(@Param() param: HandlerDriveIdParam, @Body() updatePersonDto: UpdateDriveDto): Observable<DriveEntity> {
     return this._driveService.update(param.id, updatePersonDto);
   }
 

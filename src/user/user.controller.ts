@@ -6,6 +6,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { HandlerNameParam, HandlerUserIdParam } from './validator/handler-user-params';
+import { UserEntity } from './entity/user.entity';
 
 @Controller('user')
 @UseInterceptors(UserInterceptor)
@@ -20,22 +21,22 @@ export class UserController{
   }
 
   @Get(':id')
-  findOneById(@Param() param: HandlerUserIdParam): Observable<User> {
+  findOneById(@Param() param: HandlerUserIdParam): Observable<UserEntity> {
     return this._userService.findOneById(param.id);
   }
 
   @Get('/fname/:name')
-  findMultipleByName(@Param() param: HandlerNameParam): Observable<User>{
+  findMultipleByName(@Param() param: HandlerNameParam): Observable<UserEntity>{
     return this._userService.findMultipleByName(param.name);
   }
 
   @Post()
-  create(@Body() createPersonDto: CreateUserDto): Observable<User> {
+  create(@Body() createPersonDto: CreateUserDto): Observable<UserEntity> {
     return this._userService.create(createPersonDto);
   }
 
   @Put(':id')
-  update(@Param() param: HandlerUserIdParam, @Body() updatePersonDto: UpdateUserDto): Observable<User> {
+  update(@Param() param: HandlerUserIdParam, @Body() updatePersonDto: UpdateUserDto): Observable<UserEntity> {
     return this._userService.update(param.id, updatePersonDto);
   }
 
