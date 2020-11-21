@@ -36,7 +36,7 @@ Il est possible de faire:
 - duration: number;
 - price: number;
 - stops: Adress[];
-- nbseats: number;
+- nbSeats: number;
 - date: string;
  
  
@@ -44,3 +44,19 @@ Il est possible de faire:
 - street: string;
 - postalCode: string;
 - city: string;
+
+## 21/11/2020
+
+J'ai ajouté les schémas pour mongoose de User et Drive.  
+J'ai aussi créé deux scripts js pour la base de données mongo que j'ai placé dans le dossier script-db :
+* createTable.js : créé la table covoiturage et y insère un utilisateur et un trajet
+* deleteTable.js : supprime la table covoiturage
+
+Prérequis : il faut que le service mongodb soit en route, personnellement j'utilise homebrew alors je fais `$ brew services start mongodb-community@4.4`.  
+
+J'ai ajouté les dépendances Mongoose ainsi que mis à jour le fichier de config pour pointer vers le `mongodb://0.0.0.0:27017/covoiturage`
+
+Incertitudes :
+* J'ai rajouté des @IsArray() dans les dtos pour les attributs tableau
+* J'ai déclaré les attributs comme string quand ils sont des tableaux de string (ou de Adress) dans le schéma des trajets
+* 

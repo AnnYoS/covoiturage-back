@@ -7,7 +7,7 @@ export interface Drive{
   duration: number;
   price: number;
   stops: Adress[];
-  nbseats: number;
+  nbSeats: number;
   date: string;
 }
 
