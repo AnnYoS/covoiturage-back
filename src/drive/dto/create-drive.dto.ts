@@ -1,25 +1,13 @@
 import { DriveAdressDto } from './drive-adress.dto';
-import {
-  IsArray,
-  IsDate,
-  IsInstance,
-  IsMongoId,
-  IsNotEmpty,
-  IsNumber,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { IsDate, IsInstance, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateDriveDto{
 
-  @IsMongoId()
   @IsString()
   @IsNotEmpty()
   readonly driver: string;
 
-  @IsMongoId()
-  @IsArray()
   @IsString()
   readonly clients: string[];
 
@@ -48,7 +36,7 @@ export class CreateDriveDto{
   readonly stops: DriveAdressDto[];
 
   @IsNumber()
-  readonly nbSeats: number;
+  readonly nbseats: number;
 
   @IsDate()
   @IsNotEmpty()
