@@ -1,4 +1,5 @@
 import { Prop, raw, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 @Schema({ toJSON: { virtuals: true }, versionKey: false })
 export class Drive extends Document {

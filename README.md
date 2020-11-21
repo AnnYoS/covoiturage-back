@@ -59,4 +59,3 @@ J'ai ajouté les dépendances Mongoose ainsi que mis à jour le fichier de confi
 Incertitudes :
 * J'ai rajouté des @IsArray() dans les dtos pour les attributs tableau
 * J'ai déclaré les attributs comme string quand ils sont des tableaux de string (ou de Adress) dans le schéma des trajets
-* 
