@@ -10,5 +10,6 @@ import * as Config from 'config';
     DriveModule,
     MongooseModule.forRoot(Config.get<string>('mongodb.uri'), Config.get<MongooseModuleOptions>('mongodb.options')),
   ],
+  providers: [],
 })
 export class AppModule {}

@@ -56,6 +56,9 @@ Prérequis : il faut que le service mongodb soit en route, personnellement j'uti
 
 J'ai ajouté les dépendances Mongoose ainsi que mis à jour le fichier de config pour pointer vers le `mongodb://0.0.0.0:27017/covoiturage`
 
+DAOs crées et remplis mais à coup de copié collé donc à vérifier et à tester.
+
 Incertitudes :
 * J'ai rajouté des @IsArray() dans les dtos pour les attributs tableau
 * J'ai déclaré les attributs comme string quand ils sont des tableaux de string (ou de Adress) dans le schéma des trajets
+
