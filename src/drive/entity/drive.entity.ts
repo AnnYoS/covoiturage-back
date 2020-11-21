@@ -39,7 +39,7 @@ export class DriveEntity{
 
   @Expose()
   @Type(() => Number)
-  nbseats: number;
+  nbSeats: number;
 
   @Expose()
   @Type(() => String)
