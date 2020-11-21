@@ -45,7 +45,7 @@ Il est possible de faire:
 - postalCode: string;
 - city: string;
 
-## 21/11/2020
+## 20/11/2020
 
 J'ai ajouté les schémas pour mongoose de User et Drive.  
 J'ai aussi créé deux scripts js pour la base de données mongo que j'ai placé dans le dossier script-db :
@@ -62,3 +62,25 @@ Incertitudes :
 * J'ai rajouté des @IsArray() dans les dtos pour les attributs tableau
 * J'ai déclaré les attributs comme string quand ils sont des tableaux de string (ou de Adress) dans le schéma des trajets
 
+## 21/11/2020
+
+Ajout d'un readme-mongo.txt pour le lancement du service et la création de la table, le test de celle-ci et sa suppression.
+
+J'ai mis les fonctions qui marchait sans BDD en commentaire pour l'instant, on sais jamais je voulais pas les supprimer.
+
+Pour la bdd, voici les fonctions testées :
+* GET tous les users : ok
+* POST d'un nouvel user : ok (par contre le num de téléphone ne marche qu'avec +33, 0700000000 ne marchais pas, +33700000000 si)
+* PUT d'un utilisateur : ok
+* DELETE d'un utilisateur : ok
+* GET tous les trajets : ok
+* POST d'un nouveau trajet sans clients ni stops : ok
+* POST d'un nouvau trajet avec clients et stops : ok
+* PUT d'un trajet : ok
+* DELETE d'un trajet : ok
+
+J'ai eu quelques problèmes pour la fonction findByName car pour le DAO, les fonctions sont générées par Mongoose (genre findById) par rapport aux schémas j'imagine, mais findByName() n'existe pas (findByFirstname() non plus d'ailleurs), alors à voir si pas possible en BDD (j'en doute) ou comment ajouter ça. Pareil pour les méthodes du même type dans drive.
+
+J'ai mis la date d'une drive en IsDateString() pour réutiliser le format de dates de mongo (ex. 1999-12-31T23:00:00.000Z).
+J'ai aussi mis les clients en IsOptional() pour la création et la mise à jour vu qu'il n'y a pas forcément de client lors de la création d'un trajet. Pareil pour les stops.
+J'ai aussi mis du coup les champs des stops en non requis si on ne veux pas mettre d'arrêts e ncréant le trajet (l'idée des arrêts c'est de les mettre en fonction de où veulent être déposés les gens).

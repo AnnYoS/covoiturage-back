@@ -1,11 +1,11 @@
 import { DriveAdressDto } from './drive-adress.dto';
 import {
   IsArray,
-  IsDate,
+  IsDateString,
   IsInstance,
   IsMongoId,
   IsNotEmpty,
-  IsNumber,
+  IsNumber, IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -18,9 +18,8 @@ export class CreateDriveDto{
   @IsNotEmpty()
   readonly driver: string;
 
-  @IsMongoId()
   @IsArray()
-  @IsString()
+  @IsOptional()
   readonly clients: string[];
 
   @IsInstance(DriveAdressDto)
@@ -42,15 +41,16 @@ export class CreateDriveDto{
   @IsNotEmpty()
   readonly price: number;
 
-  @IsInstance(DriveAdressDto)
-  @ValidateNested()
+  @ValidateNested({each: true})
+  @IsOptional()
+  @IsArray()
   @Type(() => DriveAdressDto)
   readonly stops: DriveAdressDto[];
 
   @IsNumber()
   readonly nbSeats: number;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly date: string;
 }

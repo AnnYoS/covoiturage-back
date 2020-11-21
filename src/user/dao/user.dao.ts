@@ -10,39 +10,48 @@ import { UpdateUserDto } from '../dto/update-user.dto';
 @Injectable()
 export class UserDao {
 
-  constructor(@InjectModel(User.name) private readonly _driveModel: Model<User>) {
+  constructor(@InjectModel(User.name) private readonly _userModel: Model<User>) {
   }
 
   find(): Observable<User[] | void> {
-    return from(this._driveModel.find({}))
+    return from(this._userModel.find({}))
       .pipe(
         map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
       );
   }
 
   findById(id: string): Observable<User | void> {
-    return from(this._driveModel.findById(id))
+    return from(this._userModel.findById(id))
       .pipe(
         map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
       );
   }
 
+  /*
+  findByName(name: string): Observable<User[] | void> {
+    return from(this._userModel.findByName(name))
+      .pipe(
+        map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
+      );
+  }
+   */
+
   save(user: CreateUserDto): Observable<User> {
-    return from(new this._driveModel(user).save())
+    return from(new this._userModel(user).save())
       .pipe(
         map((doc: MongooseDocument) => doc.toJSON()),
       );
   }
 
   findByIdAndUpdate(id: string, user: UpdateUserDto): Observable<User | void> {
-    return from(this._driveModel.findByIdAndUpdate(id, user, { new: true, runValidators: true }))
+    return from(this._userModel.findByIdAndUpdate(id, user, { new: true, runValidators: true }))
       .pipe(
         map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
       );
   }
 
   findByIdAndRemove(id: string): Observable<User | void> {
-    return from(this._driveModel.findByIdAndRemove(id))
+    return from(this._userModel.findByIdAndRemove(id))
       .pipe(
         map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
       );

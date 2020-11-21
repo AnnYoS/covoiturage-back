@@ -1,7 +1,7 @@
 import { DriveAdressDto } from './drive-adress.dto';
 import {
   IsArray,
-  IsDate,
+  IsDateString,
   IsInstance,
   IsMongoId,
   IsNotEmpty,
@@ -28,22 +28,30 @@ export class UpdateDriveDto{
   readonly clients?: string[];
 
   @IsInstance(DriveAdressDto)
-  @ValidateNested()
+  @ValidateNested({each: true})
+  @IsOptional()
+  @IsArray()
   @Type(() => DriveAdressDto)
   readonly start?: DriveAdressDto;
 
   @IsInstance(DriveAdressDto)
-  @ValidateNested()
+  @ValidateNested({each: true})
+  @IsOptional()
+  @IsArray()
   @Type(() => DriveAdressDto)
   readonly finish?: DriveAdressDto;
 
+  @IsNumber()
+  @IsOptional()
   readonly duration?: number;
 
+  @IsNumber()
+  @IsOptional()
   readonly price?: number;
 
-  @IsInstance(DriveAdressDto)
   @ValidateNested()
   @IsArray()
+  @IsOptional()
   @Type(() => DriveAdressDto)
   readonly stops?: DriveAdressDto[];
 
@@ -53,7 +61,7 @@ export class UpdateDriveDto{
   readonly nbSeats?: number;
 
   @IsOptional()
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly date?: string;
 }

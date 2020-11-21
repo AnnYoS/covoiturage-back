@@ -14,7 +14,7 @@ export class DriveEntity{
   driver: string;
 
   @Expose()
-  @Type(() => String)
+  @Type(() => Array)
   clients: string[];
 
   @Expose()
