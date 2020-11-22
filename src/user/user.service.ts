@@ -42,19 +42,6 @@ export class UserService{
       );
   }
 
-  /* méthode qui marche sans bdd (?)
-  findMultipleByName(name: string): Observable<User> {
-    return from(this._users)
-      .pipe(
-        find(_ => _.firstname === name || _.lastname === name),
-        mergeMap(_ =>
-          !!_ ?
-            of(_) :
-            throwError(new NotFoundException(`Users with firstname or lastname '${name}' not found`)),
-        ),
-      );
-  }*/
-
   create(user: CreateUserDto): Observable<UserEntity> {
     return this._addUser(user)
       .pipe(
@@ -69,22 +56,6 @@ export class UserService{
         map(_ => new UserEntity(_)),
       );
   }
-
-  /* méthode qui marche sans bdd
-  create(person: CreateUserDto): Observable<User> {
-    return from(this._users)
-      .pipe(
-        find(_ => _.mail.toLowerCase() === person.mail.toLowerCase()),
-        mergeMap(_ =>
-          !!_ ?
-            throwError(
-              new ConflictException(`An account with the mail '${person.mail}' already exists`),
-            ) :
-            this._addUser(person),
-        ),
-      );
-  }
-   */
 
   update(id: string, user: UpdateUserDto): Observable<UserEntity> {
     return this._userDao.findByIdAndUpdate(id, user)
@@ -104,25 +75,6 @@ export class UserService{
       );
   }
 
-  /* méthode qui marche sans bdd
-  update(id: string, user: UpdateUserDto): Observable<User> {
-    return from(this._users)
-      .pipe(
-        find(_ => _.firstname.toLowerCase() !== user.firstname.toLowerCase()
-          || user.lastname.toLowerCase() !== _.lastname.toLowerCase() || _.mail.toLowerCase() === user.mail.toLowerCase()),
-        mergeMap(_ =>
-          !!_ ?
-            throwError(
-              new ConflictException(`Cannot change the firstname and lastname or the new mail already exists`),
-            ) :
-            this._findUserIndexOfList(id),
-        ),
-        tap(_ => Object.assign(this._users[ _ ], user)),
-        map(_ => this._users[ _ ]),
-      );
-  }
-  */
-
   delete(id: string): Observable<void> {
     return this._userDao.findByIdAndRemove(id)
       .pipe(
@@ -131,28 +83,6 @@ export class UserService{
           !!_ ?
             of(undefined) :
             throwError(new NotFoundException(`User with id '${id}' not found`)),
-        ),
-      );
-  }
-
-  /*
-  delete(id: string): Observable<void> {
-    return this._findUserIndexOfList(id)
-      .pipe(
-        tap(_ => this._users.splice(_, 1)),
-        map(() => undefined),
-      );
-  }
-  */
-
-  // ça sert à quoi ça ?
-  private _findUserIndexOfList(id: string): Observable<number> {
-    return from(this._users)
-      .pipe(
-        findIndex(_ => _.id === id),
-        mergeMap(_ => _ > -1 ?
-          of(_) :
-          throwError(new NotFoundException(`User with id '${id}' not found`)),
         ),
       );
   }
@@ -166,24 +96,5 @@ export class UserService{
           }),
         ),
       );
-  }
-
-  /*
-  private _addUser(person: CreateUserDto): Observable<User> {
-    return of(person)
-      .pipe(
-        map(_ =>
-          Object.assign(_, {
-            id: this._createId(),
-          }) as User,
-        ),
-        tap(_ => this._users = this._users.concat(_)),
-      );
-  }
-   */
-
-  //ça sert à quoi ça ?
-  private _createId(): string {
-    return `${new Date().getTime()}`;
   }
 }

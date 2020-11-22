@@ -38,56 +38,17 @@ export class DriveService{
       );
   }
 
-  /* méthode qui marche sans bdd
-  findOne(id: string): Observable<Drive> {
-    return from(this._drives)
+  findMultipleBeginByCityName(city: string): Observable<DriveEntity[] | void> {
+    return this._driveDao.findMultipleByBeginCityName(city)
       .pipe(
-        find(_ => _.id === id),
-        mergeMap(_ =>
-          !!_ ?
-            of(_) :
-            throwError(new NotFoundException(`Drive with id '${id}' not found`)),
-        ),
-      );
-  }
-  */
-
-  // méthode qui marche sans bdd
-  findMultipleByCityName(city: string): Observable<Drive> {
-    return from(this._drives)
-      .pipe(
-        find(_ => _.start.city === city || _.finish.city === city),
-        mergeMap(_ =>
-          !!_ ?
-            of(_) :
-            throwError(new NotFoundException(`Drive with start in '${city}' not found`)),
-        ),
+        map(_ => !!_ ? _.map(__ => new DriveEntity(__)) : undefined),
       );
   }
 
-  // méthode qui marche sans bdd
-  findMultipleBeginByCityName(city: string): Observable<Drive> {
-    return from(this._drives)
+  findMultipleEndByCityName(city: string): Observable<DriveEntity[] | void> {
+    return this._driveDao.findMultipleByEndCityName(city)
       .pipe(
-        find(_ => _.start.city === city),
-        mergeMap(_ =>
-          !!_ ?
-            of(_) :
-            throwError(new NotFoundException(`Drive with start in '${city}' not found`)),
-        ),
-      );
-  }
-
-  // méthode qui marche sans bdd
-  findMultipleEndByCityName(city: string): Observable<Drive> {
-    return from(this._drives)
-      .pipe(
-        find(_ => _.finish.city === city),
-        mergeMap(_ =>
-          !!_ ?
-            of(_) :
-            throwError(new NotFoundException(`Drive with finish in '${city}' not found`)),
-        ),
+        map(_ => !!_ ? _.map(__ => new DriveEntity(__)) : undefined),
       );
   }
 
@@ -105,12 +66,6 @@ export class DriveService{
         map(_ => new DriveEntity(_)),
       );
   }
-
-  /* méthode qui marche sans bdd
-  create(drive: CreateDriveDto): Observable<Drive> {
-    return this._addDrive(drive);
-  }
-   */
 
   update(id: string, drive: UpdateDriveDto): Observable<DriveEntity> {
     return this._driveDao.findByIdAndUpdate(id, drive)
@@ -130,24 +85,6 @@ export class DriveService{
       );
   }
 
-  /* méthode qui marche sans bdd
-  update(id: string, drive: UpdateDriveDto): Observable<Drive> {
-    return from(this._drives)
-      .pipe(
-        find(_ => _.driver.toLowerCase() === drive.driver.toLowerCase()),
-        mergeMap(_ =>
-          !!_ ?
-            throwError(
-              new ConflictException(`Cannot change the driver`),
-            ) :
-            this._findDriveIndexOfList(id),
-        ),
-        tap(_ => Object.assign(this._drives[ _ ], drive)),
-        map(_ => this._drives[ _ ]),
-      );
-  }
-   */
-
   delete(id: string): Observable<void> {
     return this._driveDao.findByIdAndRemove(id)
       .pipe(
@@ -160,50 +97,13 @@ export class DriveService{
       );
   }
 
-  /* méthode qui marche sans bdd
-  delete(id: string): Observable<void> {
-    return this._findDriveIndexOfList(id)
-      .pipe(
-        tap(_ => this._drives.splice(_, 1)),
-        map(() => undefined),
-      );
-  }
-   */
-
   private _addDrive(drive: CreateDriveDto): Observable<CreateDriveDto> {
     return of(drive)
       .pipe(
         map(_ =>
           Object.assign(_, {
-            date: this._parseDate('20/09/1991'), //placeholder pour la date
+            date: this._parseDate(drive.date), //placeholder pour la date
           }),
-        ),
-      );
-  }
-
-  /*
-  private _addDrive(drive: CreateDriveDto): Observable<Drive> {
-    return of(drive)
-      .pipe(
-        map(_ =>
-          Object.assign(_, {
-            id: this._createId(),
-            date: this._parseDate(drive.date),
-          }) as Drive,
-        ),
-        tap(_ => this._drives = this._drives.concat(_)),
-      );
-  }
-   */
-
-  // ça sert à quoi ça ?
-  private _findDriveIndexOfList(id: string): Observable<number> {
-    return from(this._drives)
-      .pipe(
-        findIndex(_ => _.id === id),
-        mergeMap(_ => _ > -1 ?
-          of(_) :
-          throwError(new NotFoundException(`Drive with id '${id}' not found`)),
         ),
       );
   }
@@ -211,10 +111,5 @@ export class DriveService{
   private _parseDate(date: string): number {
     const dates = date.split('/');
     return (new Date(dates[ 2 ] + '/' + dates[ 1 ] + '/' + dates[ 0 ]).getTime());
-  }
-
-  // ça sert à quoi ?
-  private _createId(): string {
-    return `${new Date().getTime()}`;
   }
 }

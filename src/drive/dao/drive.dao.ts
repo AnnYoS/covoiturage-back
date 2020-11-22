@@ -27,6 +27,20 @@ export class DriveDao {
       );
   }
 
+  findMultipleByBeginCityName(city: string): Observable<Drive[] | void> {
+    return from(this._driveModel.find({'start.city': city}))
+      .pipe(
+        map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
+      );
+  }
+
+  findMultipleByEndCityName(city: string): Observable<Drive[] | void> {
+    return from(this._driveModel.find({'finish.city': city}))
+      .pipe(
+        map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
+      );
+  }
+
   save(drive: CreateDriveDto): Observable<Drive> {
     return from(new this._driveModel(drive).save())
       .pipe(

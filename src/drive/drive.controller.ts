@@ -28,18 +28,13 @@ export class DriveController{
     return this._driveService.findOne(param.id);
   }
 
-  @Get('/city/:cityname')
-  findMultipleByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
-    return this._driveService.findMultipleByCityName(param.cityname);
-  }
-
   @Get('/begin/:cityname')
-  findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
+  findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity[] | void> {
     return this._driveService.findMultipleBeginByCityName(param.cityname);
   }
 
   @Get('/end/:cityname')
-  findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity> {
+  findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity[] | void> {
     return this._driveService.findMultipleEndByCityName(param.cityname);
   }
 
