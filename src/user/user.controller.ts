@@ -26,7 +26,7 @@ export class UserController{
   }
 
   @Get('/fname/:name')
-  findMultipleByName(@Param() param: HandlerNameParam): Observable<UserEntity>{
+  findMultipleByName(@Param() param: HandlerNameParam): Observable<UserEntity[] | void>{
     return this._userService.findMultipleByName(param.name);
   }
 

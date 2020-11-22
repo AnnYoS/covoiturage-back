@@ -27,14 +27,12 @@ export class UserDao {
       );
   }
 
-  /*
   findByName(name: string): Observable<User[] | void> {
-    return from(this._userModel.findByName(name))
+    return from(this._userModel.find({'firstname': name, 'lastname': name} ))
       .pipe(
-        map((doc: MongooseDocument) => !!doc ? doc.toJSON() : undefined),
+        map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()) : undefined),
       );
   }
-   */
 
   save(user: CreateUserDto): Observable<User> {
     return from(new this._userModel(user).save())

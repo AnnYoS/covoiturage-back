@@ -26,15 +26,6 @@ export class DriveService{
       );
   }
 
-  /* méthode qui marche sans bdd
-  findAll(): Observable<Drive[] | void> {
-    return of(this._drives)
-      .pipe(
-        map(_ => (!!_ && !!_.length) ? _ : undefined),
-      );
-  }
-  */
-
   findOne(id: string): Observable<DriveEntity> {
     return this._driveDao.findById(id)
       .pipe(

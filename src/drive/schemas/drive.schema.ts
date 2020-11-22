@@ -24,8 +24,9 @@ export class Drive extends Document {
       trim: true,
     },
     postalCode: {
-      type: Number,
+      type: String,
       required: true,
+      trim: true,
     },
     city: {
       type: String,
@@ -42,8 +43,9 @@ export class Drive extends Document {
       trim: true,
     },
     postalCode: {
-      type: Number,
+      type: String,
       required: true,
+      trim: true,
     },
     city: {
       type: String,
@@ -55,7 +57,7 @@ export class Drive extends Document {
 
   @Prop({
     type: Number,
-    required: true,
+    required: false,
   })
   duration: number;
 
@@ -72,8 +74,9 @@ export class Drive extends Document {
       trim: true,
     },
     postalCode: {
-      type: Number,
+      type: String,
       required: false,
+      trim: true,
     },
     city: {
       type: String,

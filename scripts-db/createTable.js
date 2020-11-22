@@ -6,7 +6,7 @@ db.users.insert({
 	firstname: 'Micheline',
 	lastname: 'Garnier',
 	age: 32,
-	phone: 0700000000,
+	phone: '0700000000',
 	mail: 'micheline.garnier@joie.fr'
 });
 
@@ -32,5 +32,5 @@ db.drives.insert({
 		city: 'Paris'}
 	],
 	nbSeats: 4,
-	date: '0'
+	date: '12/03/2021'
 });
