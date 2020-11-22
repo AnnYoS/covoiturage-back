@@ -3,14 +3,13 @@ import {
   ClassSerializerInterceptor,
   Controller,
   Delete,
-  Get,
+  Get, Header,
   Param,
   Post,
   Put,
   UseInterceptors,
 } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
-import { User } from './interface/user.interface';
+import { Observable } from 'rxjs';
 import { UserInterceptor } from './interceptor/user.interceptor';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -37,6 +36,7 @@ export class UserController{
   @ApiOkResponse({description:'Return an array of user', type: UserEntity, isArray: true})
   @ApiNoContentResponse({description: 'No user exists in database'})
   @Get()
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findAll():Observable<UserEntity[] | void>{
     return this._userService.findAll();
   }
@@ -52,6 +52,7 @@ export class UserController{
     allowEmptyValue: false,
   })
   @Get(':id')
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findOneById(@Param() param: HandlerUserIdParam): Observable<UserEntity> {
     return this._userService.findOneById(param.id);
   }
@@ -67,6 +68,7 @@ export class UserController{
     allowEmptyValue: false,
   })
   @Get('/fname/:name')
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findMultipleByName(@Param() param: HandlerNameParam): Observable<UserEntity[] | void>{
     return this._userService.findMultipleByName(param.name);
   }
@@ -77,6 +79,7 @@ export class UserController{
   @ApiUnprocessableEntityResponse({ description: 'The request can\'t be performed in the database' })
   @ApiBody({ description: 'Payload to create a new user', type: CreateUserDto })
   @Post()
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   create(@Body() createPersonDto: CreateUserDto): Observable<UserEntity> {
     return this._userService.create(createPersonDto);
   }
@@ -94,6 +97,7 @@ export class UserController{
   })
   @ApiBody({ description: 'Payload to update a person', type: UpdateUserDto })
   @Put(':id')
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   update(@Param() param: HandlerUserIdParam, @Body() updatePersonDto: UpdateUserDto): Observable<UserEntity> {
     return this._userService.update(param.id, updatePersonDto);
   }
@@ -109,6 +113,7 @@ export class UserController{
     allowEmptyValue: false,
   })
   @Delete(':id')
+  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   delete(@Param() param: HandlerUserIdParam): Observable<void> {
     return this._userService.delete(param.id);
   }
