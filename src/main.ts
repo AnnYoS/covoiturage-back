@@ -31,10 +31,10 @@ async function bootstrap(config: AppConfig, swagger: SwaggerConfig) {
     .addTag(swagger.tag)
     .build();
 
-  const peopleDocument = SwaggerModule.createDocument(app, options, {
+  const covoiturageDocument = SwaggerModule.createDocument(app, options, {
     include: [ UserModule, DriveModule ],
   });
-  SwaggerModule.setup(swagger.path, app, peopleDocument);
+  SwaggerModule.setup(swagger.path, app, covoiturageDocument);
 
   await app.listen(config.port, config.host);
   Logger.log(`Application served at http://${config.host}:${config.port}`, 'bootstrap');
