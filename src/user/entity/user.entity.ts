@@ -39,6 +39,11 @@ export class UserEntity{
   @Type(() => String)
   mail: string;
 
+  @Expose()
+  get fullName(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
+
   constructor(partial: Partial<UserEntity>) {
     Object.assign(this, partial);
   }

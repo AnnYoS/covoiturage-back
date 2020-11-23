@@ -17,6 +17,10 @@ async function bootstrap(config: AppConfig, swagger: SwaggerConfig) {
     AppModule,
     new FastifyAdapter({ logger: true }),
   );
+
+  // enable CORS for our front-end app
+  app.enableCors({ origin: config.cors });
+
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
