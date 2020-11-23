@@ -15,6 +15,12 @@ export class UpdateUserDto{
   @IsNotEmpty()
   readonly lastname?: string;
 
+  @ApiProperty({ name: 'photo', description: 'photo of the user', example: 'https://randomuser.me/api/portraits/lego/1.jpg' })
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  readonly photo?: string;
+
   @ApiProperty({ name: 'age', description: 'age of the user', example: 23 })
   @IsOptional()
   @IsNumber()

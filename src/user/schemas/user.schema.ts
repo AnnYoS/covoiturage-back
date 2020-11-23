@@ -20,6 +20,12 @@ export class User extends Document {
   lastname: string;
 
   @Prop({
+    type: String,
+    required: false,
+  })
+  photo: string;
+
+  @Prop({
     type: Number,
     required: true,
   })
