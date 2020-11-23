@@ -1,6 +1,7 @@
-import { Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
+@Exclude()
 export class DriveAddressEntity{
 
   @ApiProperty({ name: 'street', description: 'street of the location', example: '8 rue de la Libération' })

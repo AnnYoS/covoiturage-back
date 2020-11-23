@@ -1,7 +1,6 @@
 import { Exclude, Expose, Type } from 'class-transformer';
-import { Address } from '../interface/drive.interface';
-import { DriveAddressEntity } from './drive.address.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import { DriveAddressEntity } from './drive-address.entity';
 
 @Exclude()
 export class DriveEntity{
@@ -24,12 +23,12 @@ export class DriveEntity{
   @ApiProperty({ name: 'start', description: 'address of the beginning of the drive' })
   @Expose()
   @Type(() => DriveAddressEntity)
-  start: Address;
+  start: DriveAddressEntity;
 
   @ApiProperty({ name: 'finish', description: 'address of the finish of the drive' })
   @Expose()
   @Type(() => DriveAddressEntity)
-  finish: Address;
+  finish: DriveAddressEntity;
 
   @ApiProperty({ name: 'duration', description: 'duration of the drive (in minutes)', example: 45 })
   @Expose()
@@ -43,8 +42,8 @@ export class DriveEntity{
 
   @ApiProperty({ name: 'stops', description: 'stops of the drive' })
   @Expose()
-  @Type(() => DriveAddressEntity)
-  stops: Address[];
+  @Type(() => Array)
+  stops: DriveAddressEntity[];
 
   @ApiProperty({ name: 'nbSeats', description: 'number of seats possible', example: 4 })
   @Expose()
