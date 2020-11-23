@@ -2,16 +2,16 @@ export interface Drive{
   id: string;
   driver: string;  //it's the id of a user
   clients: string[];  //it's the id of a user
-  start: Adress;
-  finish: Adress;
+  start: Address;
+  finish: Address;
   duration: number;
   price: number;
-  stops: Adress[];
+  stops: Address[];
   nbSeats: number;
   date: string;
 }
 
-export class Adress{
+export class Address{
   street: string;
   postalCode: string;
   city: string;

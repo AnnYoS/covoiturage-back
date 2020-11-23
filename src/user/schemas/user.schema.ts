@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema({ toJSON: { virtuals: true }, versionKey: false })
 export class User extends Document {
+
   @Prop({
     type: String,
     required: true,

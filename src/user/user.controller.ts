@@ -24,7 +24,7 @@ import {
   ApiTags, ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
 
-@ApiTags('user')
+@ApiTags('User')
 @Controller('user')
 @UseInterceptors(ClassSerializerInterceptor)
 @UseInterceptors(UserInterceptor)
@@ -95,7 +95,7 @@ export class UserController{
     type: String,
     allowEmptyValue: false,
   })
-  @ApiBody({ description: 'Payload to update a person', type: UpdateUserDto })
+  @ApiBody({ description: 'Payload to update a user', type: UpdateUserDto })
   @Put(':id')
   @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   update(@Param() param: HandlerUserIdParam, @Body() updatePersonDto: UpdateUserDto): Observable<UserEntity> {
