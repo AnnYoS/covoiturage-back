@@ -1,1 +1,3 @@
-db.covoiturage.drop()
+use covoiturage;
+
+db.dropDatabase();
