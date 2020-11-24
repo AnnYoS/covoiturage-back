@@ -26,7 +26,7 @@ export class CreateUserDto{
 
   @ApiProperty({ name: 'phone', description: 'phone number of the user', example: '0634258496' })
   @IsNotEmpty()
-  @IsPhoneNumber('FR')
+  @IsString()
   readonly phone: string;
 
   @ApiProperty({ name: 'mail', description: 'email of the user', example: 's.yoann@mail.com' })

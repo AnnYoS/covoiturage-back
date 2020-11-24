@@ -6,6 +6,7 @@ import { DriveInterceptor } from './interceptor/drive.interceptor';
 import { CreateDriveDto } from './dto/create-drive.dto';
 import { UpdateDriveDto } from './dto/update-drive.dto';
 import {
+  HandlerCityBeginEndParam,
   HandlerCitynameParam,
   HandlerDriveIdParam,
 } from './validator/handler-drive-params';
@@ -81,6 +82,11 @@ export class DriveController{
     return this._driveService.findMultipleEndByCityName(param.cityname);
   }
 
+  @Get('/fulldrive/:begin/:end')
+  findBeginEndCityName(@Param() param: HandlerCityBeginEndParam): Observable<DriveEntity[] | void>{
+    return this._driveService.findBeginEndCityName(param.begin, param.end);
+  }
+
   @ApiCreatedResponse({ description: 'The drive has been successfully created', type: DriveEntity })
   @ApiConflictResponse({ description: 'The drive already exists in the database' })
   @ApiBadRequestResponse({ description: 'Payload provided is not good' })
@@ -107,6 +113,8 @@ export class DriveController{
   update(@Param() param: HandlerDriveIdParam, @Body() updatePersonDto: UpdateDriveDto): Observable<DriveEntity> {
     return this._driveService.update(param.id, updatePersonDto);
   }
+
+
 
   @ApiNoContentResponse({ description: 'The drive has been successfully deleted' })
   @ApiNotFoundResponse({ description: 'Drive with the given "id" doesn\'t exist in the database' })

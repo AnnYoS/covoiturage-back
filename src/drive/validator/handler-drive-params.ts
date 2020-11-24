@@ -12,3 +12,13 @@ export class HandlerCitynameParam{
   @IsString()
   cityname: string;
 }
+
+export class HandlerCityBeginEndParam{
+  @IsNotEmpty()
+  @IsString()
+  begin: string;
+
+  @IsNotEmpty()
+  @IsString()
+  end: string;
+}

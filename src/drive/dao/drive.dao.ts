@@ -41,6 +41,13 @@ export class DriveDao {
       );
   }
 
+  findBeginEndCityName(begincity: string, endcity: string): Observable<Drive[] | void>{
+    return from(this._driveModel.find({'start.city': begincity, 'finish.city': endcity}))
+      .pipe(
+        map((docs: MongooseDocument[]) => (!!docs && docs.length > 0) ? docs.map(_ => _.toJSON()): undefined),
+      )
+  }
+
   save(drive: CreateDriveDto): Observable<Drive> {
     return from(new this._driveModel(drive).save())
       .pipe(

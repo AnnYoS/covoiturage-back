@@ -52,6 +52,13 @@ export class DriveService{
       );
   }
 
+  findBeginEndCityName(begincity: string, endcity: string): Observable<DriveEntity[] | void>{
+    return this._driveDao.findBeginEndCityName(begincity, endcity)
+      .pipe(
+        map(_ => !!_ ? _.map(__ => new DriveEntity(__)) : undefined),
+      );
+  }
+
   create(drive: CreateDriveDto): Observable<DriveEntity> {
     return this._addDrive(drive)
       .pipe(

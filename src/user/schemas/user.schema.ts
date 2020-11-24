@@ -35,7 +35,7 @@ export class User extends Document {
   @Prop({
     type: String,
     required: true,
-    match: /^(\+\d{11})$/,
+    match: /(\+33)(\d{9})/,
   })
   phone: string;
 
