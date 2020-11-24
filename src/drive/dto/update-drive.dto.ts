@@ -22,19 +22,17 @@ export class UpdateDriveDto{
   @IsNotEmpty()
   readonly driver?: string;
 
-  @ApiProperty({ name: 'clients', description: 'ids of clients of the drive', example: '[5d5g5shfd5sf4fhfs6h6fd4, sdh5fd5d4d5ss4f5s5sg4sd5gs]' })
+  @ApiProperty({ name: 'client', description: 'id of client of the drive', example: 'sdh5fd5d4d5ss4f5s5sg4sd5gs' })
   @IsMongoId()
   @IsOptional()
-  @IsArray()
   @IsString()
   @IsNotEmpty()
-  readonly clients?: string[];
+  readonly client?: string;
 
   @ApiProperty({ name: 'start', description: 'address of the beginning of the drive' })
   @IsInstance(DriveAddressDto)
   @ValidateNested({each: true})
   @IsOptional()
-  @IsArray()
   @Type(() => DriveAddressDto)
   readonly start?: DriveAddressDto;
 
@@ -42,7 +40,6 @@ export class UpdateDriveDto{
   @IsInstance(DriveAddressDto)
   @ValidateNested({each: true})
   @IsOptional()
-  @IsArray()
   @Type(() => DriveAddressDto)
   readonly finish?: DriveAddressDto;
 
@@ -56,22 +53,9 @@ export class UpdateDriveDto{
   @IsOptional()
   readonly price?: number;
 
-  @ApiProperty({ name: 'stops', description: 'stops of the drive' })
-  @ValidateNested()
-  @IsArray()
-  @IsOptional()
-  @Type(() => DriveAddressDto)
-  readonly stops?: DriveAddressDto[];
-
-  @ApiProperty({ name: 'nbSeats', description: 'number of seats possible', example: 4 })
-  @IsOptional()
-  @IsNumber()
-  @IsNotEmpty()
-  readonly nbSeats?: number;
-
   @ApiProperty({ name: 'date', description: 'date of the drive', example: '01/01/2021' })
   @IsOptional()
-  @IsDateString()
   @IsNotEmpty()
+  @IsString()
   readonly date?: string;
 }

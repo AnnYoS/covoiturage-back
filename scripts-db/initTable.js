@@ -86,8 +86,7 @@ db.drives.insertMany([
 		},
 		duration: 12,
 		price: 270.232,
-		nbSeats: 4,
-		date: '20/01/2021'
+		date: '01/20/2021'
 	},
 	{
 		driver: michGar,
@@ -101,21 +100,8 @@ db.drives.insertMany([
 			postalCode: '13000',
 			city: 'Marseille'
 		},
-		stops: [
-			{
-				street: 'rue du Premier Arrêt',
-				postalCode: '13000',
-				city: 'Marseille'
-			},
-			{
-				street: 'rue du Second Arrêt',
-				postalCode: '69000',
-				city: 'Lyon'
-			}
-		],
 		duration: 120,
 		price: 149.99,
-		nbSeats: 4,
 		date: '01/01/2021'
 	},
 	{
@@ -130,10 +116,9 @@ db.drives.insertMany([
 			postalCode: '13000',
 			city: 'Marseille'
 		},
-		clients: [pierBf, juanC],
+		clients: pierBf,
 		duration: 120,
 		price: 149.99,
-		nbSeats: 4,
 		date: '01/01/2021'
 	},
 	{
@@ -148,22 +133,9 @@ db.drives.insertMany([
 			postalCode: '13000',
 			city: 'Marseille'
 		},
-		clients: [juanC, donTru],
-		stops: [
-			{
-				street: 'rue du Premier Arrêt',
-				postalCode: '13000',
-				city: 'Marseille'
-			},
-			{
-				street: 'rue du Second Arrêt',
-				postalCode: '69000',
-				city: 'Lyon'
-			}
-		],
+		clients: juanC,
 		duration: 54,
 		price: 26,
-		nbSeats: 4,
-		date: '25/11/2020'
+		date: '11/25/2020'
 	}
 ]);

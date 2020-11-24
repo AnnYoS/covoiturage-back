@@ -32,7 +32,6 @@ export class DriveController{
   @ApiOkResponse({description:'Return an array of drive', type: DriveEntity, isArray: true})
   @ApiNoContentResponse({description: 'No drive exists in database'})
   @Get()
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findAll():Observable<Drive[] | void>{
     return this._driveService.findAll();
   }
@@ -48,7 +47,6 @@ export class DriveController{
     allowEmptyValue: false,
   })
   @Get(':id')
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findOne(@Param() param: HandlerDriveIdParam): Observable<DriveEntity> {
     return this._driveService.findOne(param.id);
   }
@@ -64,7 +62,6 @@ export class DriveController{
     allowEmptyValue: false,
   })
   @Get('/begin/:cityname')
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findMultipleBeginByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity[] | void> {
     return this._driveService.findMultipleBeginByCityName(param.cityname);
   }
@@ -80,7 +77,6 @@ export class DriveController{
     allowEmptyValue: false,
   })
   @Get('/end/:cityname')
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   findMultipleEndByCityName(@Param() param: HandlerCitynameParam): Observable<DriveEntity[] | void> {
     return this._driveService.findMultipleEndByCityName(param.cityname);
   }
@@ -91,7 +87,6 @@ export class DriveController{
   @ApiUnprocessableEntityResponse({ description: 'The request can\'t be performed in the database' })
   @ApiBody({ description: 'Payload to create a new drive', type: CreateDriveDto })
   @Post()
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   create(@Body() createDriveDto: CreateDriveDto): Observable<DriveEntity> {
     return this._driveService.create(createDriveDto);
   }
@@ -109,7 +104,6 @@ export class DriveController{
   })
   @ApiBody({ description: 'Payload to update a drive', type: UpdateDriveDto })
   @Put(':id')
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   update(@Param() param: HandlerDriveIdParam, @Body() updatePersonDto: UpdateDriveDto): Observable<DriveEntity> {
     return this._driveService.update(param.id, updatePersonDto);
   }
@@ -125,7 +119,6 @@ export class DriveController{
     allowEmptyValue: false,
   })
   @Delete(':id')
-  @Header('Access-Control-Allow-Origin', 'http://localhost:4200')
   delete(@Param() param: HandlerDriveIdParam): Observable<void> {
     return this._driveService.delete(param.id);
   }

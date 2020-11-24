@@ -21,9 +21,8 @@ export class CreateDriveDto{
   readonly driver: string;
 
   @ApiProperty({ name: 'clients', description: 'ids of clients of the drive', example: '[5d5g5shfd5sf4fhfs6h6fd4, sdh5fd5d4d5ss4f5s5sg4sd5gs]' })
-  @IsArray()
   @IsOptional()
-  readonly clients: string[];
+  readonly client: string;
 
   @ApiProperty({ name: 'start', description: 'address of the beginning of the drive' })
   @IsInstance(DriveAddressDto)
@@ -48,19 +47,8 @@ export class CreateDriveDto{
   @IsNotEmpty()
   readonly price: number;
 
-  @ApiProperty({ name: 'stops', description: 'stops of the drive' })
-  @ValidateNested({each: true})
-  @IsOptional()
-  @IsArray()
-  @Type(() => DriveAddressDto)
-  readonly stops: DriveAddressDto[];
-
-  @ApiProperty({ name: 'nbSeats', description: 'number of seats possible', example: 4 })
-  @IsNumber()
-  readonly nbSeats: number;
-
   @ApiProperty({ name: 'date', description: 'date of the drive', example: '01/01/2021' })
-  @IsDateString()
+  @IsString()
   @IsNotEmpty()
   readonly date: string;
 }

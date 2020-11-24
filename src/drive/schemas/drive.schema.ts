@@ -11,11 +11,11 @@ export class Drive extends Document {
   driver: string;
 
   @Prop({
-    type: Array,
+    type: String,
     required: false,
     trim: true,
   })
-  clients: string[];
+  clients: string;
 
   @Prop(raw({
     street: {
@@ -67,33 +67,8 @@ export class Drive extends Document {
   })
   price: number;
 
-  @Prop(raw({
-    street: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    postalCode: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-    city: {
-      type: String,
-      required: false,
-      trim: true,
-    },
-  }))
-  stops: any[];
-
   @Prop({
-    type: Number,
-    required: true,
-  })
-  nbSeats: number;
-
-  @Prop({
-    type: Date,
+    type: String,
     required: true,
   })
   date: string;
