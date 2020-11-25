@@ -6,7 +6,7 @@ par Nicolas KLEINHENTZ et Yoann SIMON
 
 Ouvrir un terminal.  
 Récupération du projet sur git :  
-`$ git clone https://github.com/AnnYo/covoiturage-back.git`
+`$ git clone https://github.com/AnnYoS/covoiturage-back.git`
 
 Se placer avec le terminal dans le dossier */covoiturage-back*
 
